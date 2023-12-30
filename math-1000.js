@@ -5,21 +5,19 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-// Prompt the user for input
-rl.question('Enter the value of A: ', (aInput) => {
-  
-    rl.question('Enter the value of B: ', (bInput) => {
-    // Parse the input strings to integers
-    const A = parseInt(aInput);
-    const B = parseInt(bInput);
+function prompt(question) {
+  return new Promise(resolve => rl.question(question, resolve));
+}
 
-    // Calculate the sum
-    const sum = A + B;
+async function main() {
+  const A = parseInt(await prompt('A의 값 입력: '), 10);
+  const B = parseInt(await prompt('B의 값 입력: '), 10);
 
-    // Print the result
-    console.log(`A + B = ${sum}`);
+  const sum = A + B;
 
-    // Close the readline interface
-    rl.close();
-  });
-});
+  console.log(`A + B = ${sum}`);
+
+  rl.close();
+}
+
+main();
